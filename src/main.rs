@@ -18,4 +18,5 @@ fn main() {
     day4::solution_b();
     println!("DAY 5");
     day5::solution_a();
+    day5::solution_b();
 }

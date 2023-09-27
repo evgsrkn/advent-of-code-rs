@@ -37,3 +37,47 @@ pub fn solution_a() {
     }
     println!();
 }
+
+pub fn solution_b() {
+    let data = include_str!("../../inputs/day5.txt")
+        .split("\n\n")
+        .take(2)
+        .collect::<Vec<_>>();
+
+    let (map, moves) = (data[0], data[1]);
+    let mut rs: [Vec<char>; 9] = Default::default();
+
+    map.split('\n').rev().skip(1).for_each(|l| {
+        l.chars()
+            .skip(1)
+            .step_by(4)
+            .enumerate()
+            .filter(|(_, ch)| *ch != ' ')
+            .for_each(|(i, ch)| rs[i].push(ch));
+    });
+
+    moves.split('\n').filter(|l| !l.is_empty()).for_each(|l| {
+        let mut it = l
+            .split_whitespace()
+            .skip(1)
+            .step_by(2)
+            .map(|l| l.parse::<usize>().unwrap());
+
+        let (a, b, c) = (
+            it.next().unwrap(),
+            it.next().unwrap() - 1,
+            it.next().unwrap() - 1,
+        );
+
+        let len = rs[b].len();
+        let mut d = rs[b][len - a..].to_vec();
+        rs[b].truncate(len - a);
+        rs[c].append(&mut d);
+    });
+
+    print!(" | b - ");
+    for r in rs {
+        print!("{}", r.last().unwrap())
+    }
+    println!();
+}
