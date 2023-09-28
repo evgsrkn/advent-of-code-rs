@@ -2,7 +2,7 @@ mod days;
 
 use days::{day1, day2, day3, day4};
 
-use crate::days::day5;
+use crate::days::{day5, day6};
 
 fn main() {
     println!("DAY 1");
@@ -19,4 +19,7 @@ fn main() {
     println!("DAY 5");
     day5::solution_a();
     day5::solution_b();
+    println!("DAY 6");
+    day6::solution_a();
+    day6::solution_b();
 }
